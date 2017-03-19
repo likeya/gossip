@@ -41,7 +41,7 @@ public class Gossip {
             server.setRootResourcePath(rootResourcePath);
             server.start();
 
-            Bootstrap bootstrap = new Bootstrap(server.getDeployment());
+            Bootstrap bootstrap = new Bootstrap(server.getDeployment(), configPath);
             bootstrap.start();
         } else {
             throw new IllegalStateException("The gossip server is already started, check the author's shit logic code");

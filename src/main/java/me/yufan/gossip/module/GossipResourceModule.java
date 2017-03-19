@@ -1,13 +1,14 @@
 package me.yufan.gossip.module;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
+import com.google.inject.AbstractModule;
 import me.yufan.gossip.rest.IndexResource;
+import me.yufan.gossip.rest.support.GossipExceptionProvider;
 
-public class GossipResourceModule implements Module {
+public class GossipResourceModule extends AbstractModule {
 
     @Override
-    public void configure(Binder binder) {
-        binder.bind(IndexResource.class);
+    protected void configure() {
+        binder().bind(GossipExceptionProvider.class);
+        binder().bind(IndexResource.class);
     }
 }
