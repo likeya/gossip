@@ -1,13 +1,13 @@
-package me.yufan.gossip.mapper.base;
+package me.yufan.gossip.mybatis.mapper.base;
 
-import me.yufan.gossip.entity.base.GeneralEntity;
+import me.yufan.gossip.mybatis.entity.base.IdEntity;
 
 import java.util.List;
 
 /**
  * Implements the method you need in mybatis xml file
  */
-public interface BaseMapper<E extends GeneralEntity> {
+public interface BaseMapper<E extends IdEntity> {
 
     boolean insert(E e);
 

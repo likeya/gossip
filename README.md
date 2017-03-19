@@ -19,7 +19,7 @@ I found a lot of open source comment system on Github, but none of them is easy 
 
 1. Java Runtime Environment 1.8+ (Openjdk is welcome on Linux)
 2. At least 300M free memory for running gossip comment system (Java consumes a lot memory, I was trying to reduce its consumption.)
-3. MySQL 5.x (Also support SQLite3 for estimation)
+3. MySQL 5.x require **InnoDB engine** for best performance (Also support SQLite3 for estimation)
 4. A frontend proxy server like nginx, act as the waf for gossip.
 
 ## Quick Start
@@ -99,6 +99,19 @@ and Alibaba's [antd](https://github.com/ant-design/ant-design) design.
 You should be good at **react** development.
 
 > I hate angular.js, it's too ugly in its design memo.
+
+## Develop Schedule (in progress)
+
+- [x] Resteasy integration
+- [x] MyBatis integration
+- [x] Basic gossip database schema design
+- [ ] Restful comment api
+- [ ] Restful administration api
+- [ ] Rate limit for all gossip api
+- [ ] Spam check logic
+- [ ] Gossip javascript library for frontend site reference
+- [ ] Gossip comment style design
+- [ ] Admin Panel development
 
 ## User Feedback
 

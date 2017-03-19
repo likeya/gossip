@@ -1,4 +1,4 @@
-package me.yufan.gossip.mapper.base;
+package me.yufan.gossip.mybatis.mapper.base;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

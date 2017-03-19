@@ -1,8 +1,8 @@
-package me.yufan.gossip.mapper;
+package me.yufan.gossip.mybatis.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import me.yufan.gossip.entity.Article;
-import me.yufan.gossip.mapper.base.MyBatisTestHelper;
+import me.yufan.gossip.mybatis.entity.Article;
+import me.yufan.gossip.mybatis.mapper.base.MyBatisTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -8,7 +8,7 @@ import me.yufan.gossip.service.CommentService;
 import me.yufan.gossip.service.impl.ArticleServiceImpl;
 import me.yufan.gossip.service.impl.AuthorServiceImpl;
 import me.yufan.gossip.service.impl.CommentServiceImpl;
-import me.yufan.gossip.support.GossipDataSourceProvider;
+import me.yufan.gossip.mybatis.GossipDataSourceProvider;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.MyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
@@ -49,8 +49,9 @@ public class GossipDataModule extends MyBatisModule {
 
         bindDataSourceProviderType(GossipDataSourceProvider.class);
         bindTransactionFactoryType(JdbcTransactionFactory.class);
-        addSimpleAliases("me.yufan.gossip.entity");
-        addMapperClasses("me.yufan.gossip.mapper");
+        addSimpleAliases("me.yufan.gossip.mybatis.entity");
+        addMapperClasses("me.yufan.gossip.mybatis.mapper");
+        addTypeHandlerClasses("me.yufan.gossip.mybatis.handler");
 
         initialService();
     }

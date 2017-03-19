@@ -1,4 +1,4 @@
-package me.yufan.gossip.support;
+package me.yufan.gossip.mybatis;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
