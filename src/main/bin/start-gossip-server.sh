@@ -50,4 +50,4 @@ do
 done
 
 # Start the server in background
-nohup ${JAVA} ${HEAP_OPTS} ${JVM_PERFORMANCE_OPTS} -cp ${CLASSPATH} ${MAIN_CLASS} --config ${CONFIG_DIR} $@ &
+${JAVA} ${HEAP_OPTS} ${JVM_PERFORMANCE_OPTS} -cp ${CLASSPATH} ${MAIN_CLASS} --config ${CONFIG_DIR} $@

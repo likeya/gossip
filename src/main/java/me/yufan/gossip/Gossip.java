@@ -62,7 +62,7 @@ public class Gossip {
             System.exit(0);
         } catch (BindException e) { // NOSONAR
             log.error("", e);
-            log.error("The port: [{}] you specified is used, please change to another port");
+            log.error("The port: [{}] you specified is used, please change to another port", gossip.port);
         } catch (Exception e) {
             log.error("Unexpected exception occur, copy the log below and submit a issue on " +
                     "https://github.com/syhily/gossip/issues", e);
