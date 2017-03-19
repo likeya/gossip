@@ -18,16 +18,16 @@ public class CommentStatusHandler extends BaseTypeHandler<CommentStatus> {
 
     @Override
     public CommentStatus getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return CommentStatus.convert(rs.getInt(columnName));
+        return CommentStatus.convert(rs.getString(columnName));
     }
 
     @Override
     public CommentStatus getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-           return CommentStatus.convert(rs.getInt(columnIndex));
+           return CommentStatus.convert(rs.getString(columnIndex));
     }
 
     @Override
     public CommentStatus getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return CommentStatus.convert(cs.getInt(columnIndex));
+        return CommentStatus.convert(cs.getString(columnIndex));
     }
 }

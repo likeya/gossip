@@ -2,7 +2,6 @@ package me.yufan.gossip.mybatis.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -26,12 +25,12 @@ public enum AuthorType {
 
     private static volatile Map<Integer, AuthorType> typeMap;
 
-    public static AuthorType convert(@NonNull Integer code) {
+    public static AuthorType convert(String code) {
         if (typeMap == null) {
             synchronized (AuthorType.class) {
                 typeMap = Arrays.stream(values()).collect(toMap(AuthorType::getCode, authorType -> authorType));
             }
         }
-        return typeMap.get(code);
+        return code == null ? null : typeMap.get(Integer.valueOf(code));
     }
 }

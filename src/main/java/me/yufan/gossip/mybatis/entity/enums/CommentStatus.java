@@ -2,7 +2,6 @@ package me.yufan.gossip.mybatis.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -29,13 +28,13 @@ public enum CommentStatus {
 
     private static volatile Map<Integer, CommentStatus> statusMap;
 
-    public static CommentStatus convert(@NonNull Integer statusCode) {
+    public static CommentStatus convert(String statusCode) {
         if (statusMap == null) {
             log.debug("First call CommentStatus convert method, initialize statusMap");
             synchronized (CommentStatus.class) {
                 statusMap = Arrays.stream(values()).collect(toMap(CommentStatus::getStatus, commentStatus -> commentStatus));
             }
         }
-        return statusMap.get(statusCode);
+        return statusCode == null ? null : statusMap.get(Integer.valueOf(statusCode));
     }
 }

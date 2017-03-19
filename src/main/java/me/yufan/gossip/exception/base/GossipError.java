@@ -1,4 +1,4 @@
-package me.yufan.gossip.rest.exception;
+package me.yufan.gossip.exception.base;
 
 import lombok.AllArgsConstructor;
 

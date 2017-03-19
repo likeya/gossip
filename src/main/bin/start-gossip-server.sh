@@ -27,7 +27,12 @@ fi
 
 # Memory options
 if [ -z "${HEAP_OPTS}" ]; then
-    HEAP_OPTS="-Xmx1G -Xms1G"
+    HEAP_OPTS="-Xms100m -Xmx300m -XX:PermSize=64m"
+fi
+
+# Debug for GC
+if [ "x${GOSSIP_DEBUG}" != "x" ]; then
+    HEAP_OPTS="${HEAP_OPTS} -verbose:gc"
 fi
 
 # Which java to use
@@ -49,5 +54,5 @@ do
     CLASSPATH=${CLASSPATH}:${file}
 done
 
-# Start the server in background
+# Start the gossip server
 ${JAVA} ${HEAP_OPTS} ${JVM_PERFORMANCE_OPTS} -cp ${CLASSPATH} ${MAIN_CLASS} --config ${CONFIG_DIR} $@

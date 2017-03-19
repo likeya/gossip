@@ -2,6 +2,8 @@ package me.yufan.gossip.module;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
+import me.yufan.gossip.exception.GossipInitializeException;
 import me.yufan.gossip.service.ArticleService;
 import me.yufan.gossip.service.AuthorService;
 import me.yufan.gossip.service.CommentService;
@@ -18,6 +20,7 @@ import java.util.Map;
 /**
  * Configuration on database and service interface
  */
+@Slf4j
 public class GossipDataModule extends MyBatisModule {
 
     private static final Map<String, JdbcHelper> databaseHolder = ImmutableMap.<String, JdbcHelper>builder()
@@ -29,7 +32,7 @@ public class GossipDataModule extends MyBatisModule {
         final String databaseType = GossipConfigModule.getDatabaseType();
         final JdbcHelper helper = databaseHolder.get(databaseType);
         if (helper == null) {
-            throw new IllegalArgumentException("Illegal config, we only support mysql or sqlite");
+            throw new GossipInitializeException("Illegal config, we only support mysql or sqlite");
         }
         install(helper);
     }

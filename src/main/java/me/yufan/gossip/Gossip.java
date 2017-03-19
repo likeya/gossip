@@ -6,6 +6,7 @@ import com.beust.jcommander.ParameterException;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import me.yufan.gossip.exception.GossipInitializeException;
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 
 import java.net.BindException;
@@ -29,8 +30,11 @@ public class Gossip {
     @Parameter(names = {"-r", "--root"}, description = "The root resource path for comment server")
     private String rootResourcePath = ""; // NOSONAR
 
-    @Parameter(names = {"-c", "--config"}, required = true, hidden = true)
+    @Parameter(names = {"-c", "--config"}, required = true, hidden = true, description = "Custom config path")
     private String configPath;
+
+    @Parameter(names = {"-f", "--file"}, description = "Custom config file")
+    private String configFile;
 
     private NettyJaxrsServer server;
 
@@ -41,10 +45,10 @@ public class Gossip {
             server.setRootResourcePath(rootResourcePath);
             server.start();
 
-            Bootstrap bootstrap = new Bootstrap(server.getDeployment(), configPath);
+            Bootstrap bootstrap = new Bootstrap(server.getDeployment(), configPath, configFile);
             bootstrap.start();
         } else {
-            throw new IllegalStateException("The gossip server is already started, check the author's shit logic code");
+            throw new GossipInitializeException("The gossip server is already started, check the author's shit logic code");
         }
     }
 
@@ -63,8 +67,12 @@ public class Gossip {
         } catch (BindException e) { // NOSONAR
             log.error("", e);
             log.error("The port: [{}] you specified is used, please change to another port", gossip.port);
+        } catch (GossipInitializeException e) {
+            log.error("", e);
+            log.error(e.getMessage() + "\nOr you can copy the error log above and ask the author for help.");
         } catch (Exception e) {
-            log.error("Unexpected exception occur, copy the log below and submit a issue on " +
+            log.error("", e);
+            log.error("Unexpected exception occur, copy the log above and submit a issue on " +
                     "https://github.com/syhily/gossip/issues", e);
         }
     }

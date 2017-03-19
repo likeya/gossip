@@ -1,4 +1,4 @@
-package me.yufan.gossip.rest.exception;
+package me.yufan.gossip.exception.base;
 
 import lombok.Getter;
 
@@ -10,6 +10,11 @@ public abstract class BaseGossipException extends RuntimeException {
 
     public BaseGossipException(String message, GossipError error) {
         super(message);
+        this.error = error;
+    }
+
+    public BaseGossipException(String message, Throwable cause, GossipError error) {
+        super(message, cause);
         this.error = error;
     }
 }

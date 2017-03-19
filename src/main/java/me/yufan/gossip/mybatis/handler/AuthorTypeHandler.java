@@ -18,16 +18,16 @@ public class AuthorTypeHandler extends BaseTypeHandler<AuthorType> {
 
     @Override
     public AuthorType getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return AuthorType.convert(rs.getInt(columnName));
+        return AuthorType.convert(rs.getString(columnName));
     }
 
     @Override
     public AuthorType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return AuthorType.convert(rs.getInt(columnIndex));
+        return AuthorType.convert(rs.getString(columnIndex));
     }
 
     @Override
     public AuthorType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return AuthorType.convert(cs.getInt(columnIndex));
+        return AuthorType.convert(cs.getString(columnIndex));
     }
 }

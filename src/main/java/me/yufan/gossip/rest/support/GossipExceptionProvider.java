@@ -1,6 +1,6 @@
 package me.yufan.gossip.rest.support;
 
-import me.yufan.gossip.rest.exception.BaseGossipException;
+import me.yufan.gossip.exception.base.BaseGossipException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
