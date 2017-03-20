@@ -73,7 +73,7 @@ public class Gossip {
         } catch (Exception e) {
             log.error("", e);
             log.error("Unexpected exception occur, copy the log above and submit a issue on " +
-                    "https://github.com/syhily/gossip/issues", e);
+                    "https://github.com/syhily/gossip/issues");
         }
     }
 }

@@ -23,7 +23,7 @@ public abstract class MyBatisTestHelper {
             throw new FileNotFoundException("Your should place the gossip.properties in your test resource directory");
         }
         final String path = Paths.get(url.toURI()).getParent().toString();
-        injector = Guice.createInjector(new GossipConfigModule(path), new GossipDataModule());
+        injector = Guice.createInjector(new GossipConfigModule(path, "gossip-test.properties"), new GossipDataModule());
     }
 
     protected Long randomId() {
