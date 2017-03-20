@@ -82,7 +82,7 @@ The gossip backend part is build upon three famous framework on Java:
 You should be familiar with them before devoting yourself into the gossip development. IntelliJ IDEA is the recommend IDE for
 backend server development.
 
-> [lombok plugin](https://projectlombok.org/) is needed to install on your favourite IDE.
+> [lombok plugin](https://projectlombok.org/) need to be installed on your favourite IDE.
 
 ### Frontend library
 
