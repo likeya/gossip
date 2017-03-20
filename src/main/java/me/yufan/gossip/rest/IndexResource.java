@@ -12,7 +12,9 @@ public class IndexResource implements BaseResource {
 
     @GET
     @Produces(value = "text/plain")
-    public String helloWorld() {
-        return "Hello";
+    // TODO change it to a api friendly response, could be used as heart beat page
+    // TODO add gossip info, system info, trace info, etc
+    public String welcome() {
+        return "Welcome to use gossip comment system,\n the system is fully started when you saw this page";
     }
 }
