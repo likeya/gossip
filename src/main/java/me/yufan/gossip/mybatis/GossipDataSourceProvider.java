@@ -54,19 +54,18 @@ public class GossipDataSourceProvider extends DruidDataSourceProvider {
      * Auto load database schema
      * TODO how to auto update database schema
      */
-    private void loadSchema(final String jdbcUrl, final String username, final String password) {
+    private void loadSchema(final String jdbcUrl, final String username, final String password, final String dbType) {
         log.debug("Execute auto schema load on {}", jdbcUrl);
-
         try (final Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            executeSQL(connection, getResourceAsReader("schema.sql"));
+            executeSQL(connection, getResourceAsReader(String.format("schema-%s.sql", dbType)));
         } catch (SQLException | IOException e) {
             throw new GossipInitializeException("Database schema load failed, plz check your db connection and configuration", e);
         }
     }
 
     /**
-     * Magic code for mysql & sqlite, mysql jdbc url would remove the database part,
-     * sqlite jdbc would do nothing.
+     * Magic code for mysql & h2, mysql jdbc url would remove the database part,
+     * h2 jdbc would do nothing.
      */
     private String normalizeJdbcUrl(@NonNull String url) {
         int index = url.lastIndexOf('/');
@@ -81,9 +80,11 @@ public class GossipDataSourceProvider extends DruidDataSourceProvider {
     @Inject
     public void initialSchema(@Named("JDBC.url") String jdbcUrl, @Named("JDBC.schema") String databaseName,
                               @Named("JDBC.username") final String username, @Named("JDBC.password") final String password) {
+        String dbType = "h2";
         if (jdbcUrl.contains("mysql")) {
             createSchema(normalizeJdbcUrl(jdbcUrl), databaseName, username, password);
+            dbType = "mysql";
         }
-        loadSchema(jdbcUrl, username, password);
+        loadSchema(jdbcUrl, username, password, dbType);
     }
 }

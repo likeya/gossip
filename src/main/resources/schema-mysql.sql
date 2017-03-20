@@ -1,4 +1,4 @@
--- The init scripts for gossip system
+-- The init mysql scripts for gossip system
 
 -- Table Article
 CREATE TABLE IF NOT EXISTS `article` (

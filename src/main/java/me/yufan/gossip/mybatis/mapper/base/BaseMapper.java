@@ -1,6 +1,7 @@
 package me.yufan.gossip.mybatis.mapper.base;
 
 import me.yufan.gossip.mybatis.entity.base.IdEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface BaseMapper<E extends IdEntity> {
 
     boolean insert(E e);
 
-    void batchInsert(List<E> list);
+    void batchInsert(@Param("list") List<E> list);
 
     E queryOne(Long id);
 
@@ -21,7 +22,7 @@ public interface BaseMapper<E extends IdEntity> {
 
     boolean update(E e);
 
-    boolean delete(Long id);
+    boolean delete(@Param("id") Long id, @Param("timestamp") Long timestamp);
 
-    boolean deleteAll();
+    boolean deleteAll(@Param("timestamp") Long timestamp);
 }

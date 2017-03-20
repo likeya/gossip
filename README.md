@@ -23,7 +23,7 @@ I found a lot of open source comment system on Github, but none of them is easy 
 
 1. Java Runtime Environment 1.8+ (Openjdk is welcome on Linux)
 2. At least 300M free memory for running gossip comment system (Java consumes a lot memory, I was trying to reduce its consumption.)
-3. MySQL 5.x - **InnoDB engine** is required for better performance (Also support SQLite3 for estimation)
+3. MySQL 5.x - **InnoDB engine** is required for better performance (Also support H2 database for estimation, sqlite would not be a good choice)
 4. A frontend proxy server like nginx, act as the waf for gossip.
 
 ## Quick Start

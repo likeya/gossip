@@ -1,33 +1,57 @@
 package me.yufan.gossip.mybatis.mapper.base;
 
+import com.google.common.base.Charsets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import lombok.SneakyThrows;
 import me.yufan.gossip.module.GossipConfigModule;
 import me.yufan.gossip.module.GossipDataModule;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.BeforeClass;
 
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import javax.sql.DataSource;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.URI;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class MyBatisTestHelper {
 
+    private static final String INIT_DB_SCRIPTS = "initialize-db.sql";
     protected static Injector injector;
 
+    @SneakyThrows
+    private static void loadInitializeData(Injector injector, Reader reader) {
+        DataSource dataSource = injector.getInstance(DataSource.class);
+
+        try (final Connection connection = dataSource.getConnection()) {
+            ScriptRunner runner = new ScriptRunner(connection);
+            runner.setAutoCommit(true);
+            runner.setStopOnError(true);
+            runner.runScript(reader);
+        } // Auto close connection
+    }
+
     @BeforeClass
-    public static void initializeDatasource() throws FileNotFoundException, URISyntaxException {
-        final URL url = MyBatisTestHelper.class.getClassLoader().getResource("gossip.properties");
-        if (url == null) {
-            throw new FileNotFoundException("Your should place the gossip.properties in your test resource directory");
-        }
-        final String path = Paths.get(url.toURI()).getParent().toString();
+    @SneakyThrows
+    public static void initializeDatasource() {
+        final Path testResourcePath = Paths.get("src/test/resources");
+        final String path = testResourcePath.toAbsolutePath().toString();
+
+        final URI dbInitFile = Paths.get((path.endsWith("/") ? path : path + "/") + INIT_DB_SCRIPTS).toUri();
+        Reader reader = new StringReader(IOUtils.toString(dbInitFile, Charsets.UTF_8.name()));
+
         injector = Guice.createInjector(new GossipConfigModule(path, "gossip-test.properties"), new GossipDataModule());
+        loadInitializeData(injector, reader);
     }
 
     protected Long randomId() {
-        return null;
+        return ThreadLocalRandom.current().nextLong(100000, 200000);
     }
 
     protected String randomString(int length) {
