@@ -8,6 +8,7 @@ import me.yufan.gossip.service.ArticleService;
 import me.yufan.gossip.service.AuthorService;
 import me.yufan.gossip.service.CommentService;
 
+import javax.validation.Valid;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -39,7 +40,11 @@ public class CommentResource implements BaseResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response comment(CommentReq comment) {
+    public Response comment(@Valid CommentReq comment) {
+        // TODO Check the existed article
+        articleService.getOrRegisterArticle(null);
+
+
         // TODO auto create article
         // TODO auto insert comment data
         // TODO auto author indexes
