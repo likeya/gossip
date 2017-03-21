@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface ArticleService {
 
-    void registerArticle(Article article);
+    Article getArticleByUniqueKey(String uniqueKey);
+
+    Article getOrRegisterArticle(Article article);
 
     void deleteArticle(Long articleId);
 

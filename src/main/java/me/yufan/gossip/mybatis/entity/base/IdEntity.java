@@ -1,6 +1,7 @@
 package me.yufan.gossip.mybatis.entity.base;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
  * Common dao entity properties, add optimistic lock on mybatis
  */
 @Data
+@Accessors(chain = true)
 public abstract class IdEntity implements Serializable {
     private static final long serialVersionUID = 5610225466434157947L;
 

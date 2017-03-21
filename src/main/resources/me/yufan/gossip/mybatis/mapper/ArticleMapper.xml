@@ -52,6 +52,16 @@
         <include refid="tableName"/>
     </select>
 
+    <select id="queryByKey" resultType="article">
+        SELECT
+        <include refid="articleColumn"/>
+        FROM
+        <include refid="tableName"/>
+        <where>
+            `unique_key` = #{key}
+        </where>
+    </select>
+
     <!-- Update Part -->
     <update id="update" parameterType="article">
         UPDATE
