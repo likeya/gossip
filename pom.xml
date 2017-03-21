@@ -66,6 +66,7 @@
         <lombok.version>1.16.8</lombok.version>
         <jcommander.version>1.64</jcommander.version>
         <resteasy.version>3.1.1.Final</resteasy.version>
+        <jsoup.version>1.10.2</jsoup.version>
 
         <!-- Test libraries -->
         <junit.version>4.12</junit.version>
@@ -87,6 +88,7 @@
             <url>http://maven.aliyun.com/nexus/content/repositories/central</url>
         </repository>
     </repositories>
+
 
     <dependencies>
         <dependency>
@@ -135,6 +137,19 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-netty4</artifactId>
             <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-validator-provider-11</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <!-- XSS protection -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
         </dependency>
 
         <!-- JSON Libraries -->

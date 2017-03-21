@@ -23,14 +23,10 @@ public enum AuthorType {
 
     private final Integer code;
 
-    private static volatile Map<Integer, AuthorType> typeMap;
+    private static volatile Map<Integer, AuthorType> typeMap =
+            Arrays.stream(values()).collect(toMap(AuthorType::getCode, authorType -> authorType));
 
     public static AuthorType convert(String code) {
-        if (typeMap == null) {
-            synchronized (AuthorType.class) {
-                typeMap = Arrays.stream(values()).collect(toMap(AuthorType::getCode, authorType -> authorType));
-            }
-        }
         return code == null ? null : typeMap.get(Integer.valueOf(code));
     }
 }

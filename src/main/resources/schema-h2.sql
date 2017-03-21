@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS `author` (
   `id`          INT                 NOT NULL AUTO_INCREMENT,
   `name`        VARCHAR(128)        NOT NULL,
   `email`       VARCHAR(128) UNIQUE NOT NULL,
-  `homepage`    VARCHAR(256)        NOT NULL,
+  `homepage`    VARCHAR(256)        NOT NULL DEFAULT '',
   `author_type` INT                 NOT NULL DEFAULT 0,
-  `create_time` TIMESTAMP                    DEFAULT CURRENT_TIMESTAMP,
+  `create_time` TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted`     BIGINT              NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`id`)
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `message`          TEXT         NOT NULL,
   `parent_id`        INT COMMENT 'the comment parent id',
   `status`           SMALLINT     NOT NULL DEFAULT 0,
-  `create_time`      TIMESTAMP             DEFAULT CURRENT_TIMESTAMP,
-  `last_update_time` TIMESTAMP             DEFAULT CURRENT_TIMESTAMP,
+  `create_time`      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_update_time` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `version`          VARCHAR(128) NOT NULL DEFAULT '',
   `deleted`          BIGINT       NOT NULL DEFAULT 0,
 
