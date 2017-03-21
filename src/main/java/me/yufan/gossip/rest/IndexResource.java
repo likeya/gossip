@@ -15,6 +15,7 @@ public class IndexResource implements BaseResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    // TODO add gossip info, system info, trace info, etc
     public Response welcome() {
         final String welcome = "Welcome to use gossip comment system," +
                 "\n the system is fully started when you saw this page";
