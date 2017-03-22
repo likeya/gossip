@@ -43,7 +43,7 @@ git checkout develop
 Make sure maven's bin file `mvn` could be execute from your `$PATH`
 
 ```bash
-mvn clean packge -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true
 ```
 
 A distribution package is located in `target` directory named in `gossip-x.x-SNAPSHOT.tar.gz` form.
