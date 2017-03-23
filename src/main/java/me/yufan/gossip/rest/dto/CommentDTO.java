@@ -1,18 +1,23 @@
-package me.yufan.gossip.rest.requeset;
+package me.yufan.gossip.rest.dto;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import me.yufan.gossip.rest.support.Pagination;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+
+import static org.hibernate.validator.constraints.SafeHtml.WhiteListType.SIMPLE_TEXT;
 
 /**
  * The main comment data from the blog page
  */
 @Data
-public class CommentReq implements Serializable {
+@Accessors(chain = true)
+public class CommentDTO extends Pagination {
     private static final long serialVersionUID = -6513873674420367775L;
 
     // The parent comment id
@@ -37,5 +42,7 @@ public class CommentReq implements Serializable {
     private String website;
 
     // The main body of comments
+    @NotNull
+    @SafeHtml(whitelistType = SIMPLE_TEXT)
     private String message;
 }

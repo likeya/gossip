@@ -6,9 +6,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static me.yufan.gossip.mybatis.utils.RandomArticle.randomArticle;
-import static me.yufan.gossip.mybatis.utils.RandomArticle.randomRawArticle;
-import static me.yufan.gossip.mybatis.utils.RandomEntityGenerator.randomId;
+import static me.yufan.gossip.utils.RandomArticle.randomArticle;
+import static me.yufan.gossip.utils.RandomArticle.randomRawArticle;
+import static me.yufan.gossip.utils.RandomEntityGenerator.randomId;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -19,7 +19,7 @@ public class ArticleServiceImplTest {
 
     private ArticleMapper articleMapper = mock(ArticleMapper.class);
 
-    private ArticleServiceImpl articleService = new ArticleServiceImpl(articleMapper);
+    private ArticleServiceImpl articleService = new ArticleServiceImpl(articleMapper, articleConverter);
 
     private void noArticleFromUniqueKey(String uniqueKey) {
         when(articleMapper.queryByKey(uniqueKey)).thenReturn(null);

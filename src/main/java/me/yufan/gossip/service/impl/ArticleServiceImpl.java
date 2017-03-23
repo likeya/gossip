@@ -2,9 +2,12 @@ package me.yufan.gossip.service.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import me.yufan.gossip.converter.ArticleConverter;
 import me.yufan.gossip.mybatis.entity.Article;
 import me.yufan.gossip.mybatis.mapper.ArticleMapper;
+import me.yufan.gossip.rest.dto.ArticleDTO;
 import me.yufan.gossip.service.ArticleService;
 
 import java.util.List;
@@ -15,26 +18,34 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleMapper articleMapper;
 
+    private final ArticleConverter articleConverter;
+
     @Inject
-    public ArticleServiceImpl(ArticleMapper articleMapper) {
+    public ArticleServiceImpl(ArticleMapper articleMapper, ArticleConverter articleConverter) {
         this.articleMapper = articleMapper;
+        this.articleConverter = articleConverter;
     }
 
 
     @Override
-    public Article getArticleByUniqueKey(String uniqueKey) {
-        return articleMapper.queryByKey(uniqueKey);
-    }
-
-    @Override
-    public Article getOrRegisterArticle(Article article) {
-        Article existedArticle = articleMapper.queryByKey(article.getUniqueKey());
-        if (existedArticle == null) {
-            log.debug("The article {} is not existed, register it.", article.getUniqueKey());
-
-            articleMapper.insert(article);
+    public ArticleDTO getArticleByUniqueKey(@NonNull String uniqueKey) {
+        final Article existedArticle = articleMapper.queryByKey(uniqueKey);
+        if (log.isDebugEnabled()) {
+            log.debug("Query article {} by key {}", existedArticle, uniqueKey);
         }
-        return article;
+        return articleConverter.reverse().convert(existedArticle);
+    }
+
+    @Override
+    public ArticleDTO getOrRegisterArticle(@NonNull final ArticleDTO article) {
+        Article existedArticle = articleMapper.queryByKey(article.getKey());
+        if (existedArticle == null) {
+            log.debug("The article {} is not existed, register it.", article.getKey());
+
+            existedArticle = articleConverter.convert(article);
+            articleMapper.insert(existedArticle);
+        }
+        return articleConverter.reverse().convert(existedArticle);
     }
 
     @Override
@@ -43,12 +54,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void modifyArticle(Long articleId, Article article) {
+    public void modifyArticle(Long articleId, ArticleDTO article) {
 
     }
 
     @Override
-    public List<Article> listArticle(Integer start, Integer end) {
+    public List<ArticleDTO> listArticle(Integer start, Integer end) {
         return null;
     }
 }

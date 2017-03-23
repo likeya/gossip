@@ -61,6 +61,16 @@
         <include refid="tableName"/>
     </select>
 
+    <select id="getCommentsByArticleId" resultType="me.yufan.gossip.mybatis.entity.Comment">
+        SELECT
+        <include refid="commentColumn"/>
+        FROM
+        <include refid="tableName"/>
+        <where>
+            `article_id` = #{articleId}
+        </where>
+    </select>
+
     <!-- Update Part -->
     <update id="update" parameterType="comment">
         UPDATE

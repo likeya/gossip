@@ -12,6 +12,6 @@ public class GossipExceptionProvider implements ExceptionMapper<BaseGossipExcept
 
     @Override
     public Response toResponse(BaseGossipException exception) {
-        return Response.status(exception.getError().errorCode).entity(BaseApiResponse.failed(exception)).build();
+        return Response.status(exception.getError().serverCode).entity(BaseApiResponse.failed(exception)).build();
     }
 }
