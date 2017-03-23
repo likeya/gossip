@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Singleton;
 import com.mysql.jdbc.Driver;
 import lombok.extern.slf4j.Slf4j;
+import me.yufan.gossip.converter.ArticleConverter;
+import me.yufan.gossip.converter.CommentConverter;
 import me.yufan.gossip.exception.GossipInitializeException;
 import me.yufan.gossip.mybatis.GossipDataSourceProvider;
 import me.yufan.gossip.service.ArticleService;
@@ -52,6 +54,9 @@ public class GossipDataModule extends MyBatisModule {
      * Common dto service initialize
      */
     private void initialService() {
+        bind(ArticleConverter.class).toProvider(ArticleConverter::new).in(Singleton.class);
+        bind(CommentConverter.class).toProvider(CommentConverter::new).in(Singleton.class);
+
         bind(ArticleService.class).to(ArticleServiceImpl.class).in(Singleton.class);
         bind(AuthorService.class).to(AuthorServiceImpl.class).in(Singleton.class);
         bind(CommentService.class).to(CommentServiceImpl.class).in(Singleton.class);

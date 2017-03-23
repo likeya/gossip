@@ -40,7 +40,7 @@ Switch to `develop` branch
 git checkout develop
 ```
 
-Make sure maven's bin file `mvn` could be execute from your `$PATH`
+Make sure maven's bin file `mvn` could be executed from your `$PATH`
 
 ```bash
 mvn clean package -Dmaven.test.skip=true

@@ -1,4 +1,4 @@
-package me.yufan.gossip.mybatis.utils;
+package me.yufan.gossip.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

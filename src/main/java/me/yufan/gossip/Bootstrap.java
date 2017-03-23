@@ -29,6 +29,6 @@ class Bootstrap {
         ModuleProcessor processor = new ModuleProcessor(deployment.getRegistry(), deployment.getProviderFactory());
         processor.processInjector(injector);
 
-        log.info("Successful launched gossip server");
+        log.info("Successfully launched gossip server");
     }
 }

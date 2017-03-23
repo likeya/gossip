@@ -73,6 +73,7 @@
         <hamcrest.version>1.3</hamcrest.version>
         <mockito.version>1.10.19</mockito.version>
         <commons-lang3.version>3.5</commons-lang3.version>
+        <retrofit.version>2.2.0</retrofit.version>
     </properties>
 
     <repositories>
@@ -250,6 +251,19 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-jackson</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+
         <!-- Compile scope helper libraries -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -296,6 +310,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- TODO add failsafe plugin for integration test -->
         </plugins>
     </build>
 </project>

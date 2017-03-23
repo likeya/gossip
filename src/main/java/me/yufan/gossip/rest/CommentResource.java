@@ -2,18 +2,23 @@ package me.yufan.gossip.rest;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import me.yufan.gossip.rest.requeset.CommentReq;
+import me.yufan.gossip.rest.dto.ArticleDTO;
+import me.yufan.gossip.rest.dto.CommentDTO;
 import me.yufan.gossip.rest.response.BaseApiResponse;
+import me.yufan.gossip.rest.response.CommentResponse;
 import me.yufan.gossip.service.ArticleService;
 import me.yufan.gossip.service.AuthorService;
 import me.yufan.gossip.service.CommentService;
 
 import javax.validation.Valid;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 /**
  * The main comment api for gossip
@@ -38,9 +43,19 @@ public class CommentResource implements BaseResource {
         this.authorService = authorService;
     }
 
+    @GET
+    @Path("/comments")
+    @Produces(APPLICATION_JSON)
+    public Response loadComment(@Valid final ArticleDTO articleDTO) {
+        ArticleDTO article = articleService.getOrRegisterArticle(articleDTO);
+        List<CommentDTO> comments = commentService.getCommentsByArticleId(article);
+
+        return Response.ok(new CommentResponse().body(comments, articleDTO)).build();
+    }
+
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response comment(@Valid CommentReq comment) {
+    @Produces(APPLICATION_JSON)
+    public Response comment(@Valid final CommentDTO comment) {
         // TODO Check the existed article
         articleService.getOrRegisterArticle(null);
 

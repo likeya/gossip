@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
-import static me.yufan.gossip.mybatis.utils.RandomArticle.randomArticle;
-import static me.yufan.gossip.mybatis.utils.RandomEntityGenerator.randomString;
+import static me.yufan.gossip.utils.RandomArticle.randomArticle;
+import static me.yufan.gossip.utils.RandomEntityGenerator.randomString;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
