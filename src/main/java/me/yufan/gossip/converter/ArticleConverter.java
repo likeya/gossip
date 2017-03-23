@@ -8,7 +8,7 @@ public class ArticleConverter extends Converter<ArticleDTO, Article> {
 
     @Override
     protected Article doForward(ArticleDTO articleDTO) {
-        return articleDTO == null ? null : new Article()
+        return new Article()
             .setName(articleDTO.getName())
             .setUniqueKey(articleDTO.getKey())
             .setUrl(articleDTO.getUrl());
@@ -16,7 +16,7 @@ public class ArticleConverter extends Converter<ArticleDTO, Article> {
 
     @Override
     protected ArticleDTO doBackward(Article article) {
-        return article == null ? null : new ArticleDTO()
+        return new ArticleDTO()
             .setName(article.getName())
             .setUrl(article.getUrl())
             .setKey(article.getUniqueKey());

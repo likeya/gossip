@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CommentService {
 
-    List<CommentDTO> getCommentsByArticleId(ArticleDTO article);
+    List<CommentDTO> getCommentsByArticle(ArticleDTO article);
 }

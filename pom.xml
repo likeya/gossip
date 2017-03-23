@@ -262,6 +262,7 @@
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-jackson</artifactId>
             <version>${retrofit.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Compile scope helper libraries -->

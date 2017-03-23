@@ -9,14 +9,14 @@ public class CommentConverter extends Converter<CommentDTO, Comment> {
     @Override
     protected Comment doForward(CommentDTO commentDTO) {
         return new Comment()
-                .setMessage(commentDTO.getMessage())
-                .setParentId(commentDTO.getReplyPostId());
+            .setMessage(commentDTO.getMessage())
+            .setParentId(commentDTO.getReplyPostId());
     }
 
     @Override
     protected CommentDTO doBackward(Comment comment) {
         return new CommentDTO()
-                .setMessage(comment.getMessage())
-                .setReplyPostId(comment.getParentId());
+            .setMessage(comment.getMessage())
+            .setReplyPostId(comment.getParentId());
     }
 }

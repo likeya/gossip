@@ -1,7 +1,6 @@
 package me.yufan.gossip.rest.response;
 
 import me.yufan.gossip.rest.dto.CommentDTO;
-import me.yufan.gossip.rest.support.Pagination;
 
 import java.util.List;
 

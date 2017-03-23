@@ -1,7 +1,9 @@
 package me.yufan.gossip.service.impl;
 
+import me.yufan.gossip.converter.ArticleConverter;
 import me.yufan.gossip.mybatis.entity.Article;
 import me.yufan.gossip.mybatis.mapper.ArticleMapper;
+import me.yufan.gossip.rest.dto.ArticleDTO;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -9,8 +11,8 @@ import org.junit.runners.MethodSorters;
 import static me.yufan.gossip.utils.RandomArticle.randomArticle;
 import static me.yufan.gossip.utils.RandomArticle.randomRawArticle;
 import static me.yufan.gossip.utils.RandomEntityGenerator.randomId;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 public class ArticleServiceImplTest {
 
     private ArticleMapper articleMapper = mock(ArticleMapper.class);
+
+    private ArticleConverter articleConverter = new ArticleConverter();
 
     private ArticleServiceImpl articleService = new ArticleServiceImpl(articleMapper, articleConverter);
 
@@ -44,9 +48,9 @@ public class ArticleServiceImplTest {
         String uniqueKey = article.getUniqueKey();
         oneArticleFromUniqueKey(article);
 
-        final Article queryArticle = articleService.getArticleByUniqueKey(uniqueKey);
+        ArticleDTO queryArticle = articleService.getArticleByUniqueKey(uniqueKey);
         verify(articleMapper, only()).queryByKey(uniqueKey);
-        assertThat(article, is(queryArticle));
+        assertThat(articleConverter.reverse().convert(article), is(queryArticle));
     }
 
     @Test
@@ -56,11 +60,12 @@ public class ArticleServiceImplTest {
 
         noArticleFromUniqueKey(article.getUniqueKey());
         registerArticle(article, newId);
+        ArticleDTO convert = articleConverter.reverse().convert(article);
 
         assertThat(article.getId(), nullValue());
-        Article newArticle = articleService.getOrRegisterArticle(article);
+        ArticleDTO newArticle = articleService.getOrRegisterArticle(convert);
         assertThat(article.getId(), is(newId));
-        assertThat(article, is(newArticle));
+        assertThat(convert, is(newArticle));
     }
 
     @Test
@@ -68,10 +73,11 @@ public class ArticleServiceImplTest {
         Article article = randomArticle();
 
         oneArticleFromUniqueKey(article);
-        final Article registeredArticle = articleService.getOrRegisterArticle(article);
+        final ArticleDTO convert = articleConverter.reverse().convert(article);
+        ArticleDTO registeredArticle = articleService.getOrRegisterArticle(convert);
 
         verify(articleMapper, only()).queryByKey(article.getUniqueKey());
         verify(articleMapper, never()).insert(article);
-        assertThat(registeredArticle, is(article));
+        assertThat(registeredArticle, is(convert));
     }
 }

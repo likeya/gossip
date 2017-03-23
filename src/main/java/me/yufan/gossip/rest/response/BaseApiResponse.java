@@ -46,12 +46,17 @@ public class BaseApiResponse<E> extends Pagination {
         return new BaseApiResponse<Void>().setSuccess(true);
     }
 
+    public BaseApiResponse<E> body(E entity) {
+        return body(entity, null);
+    }
 
     public BaseApiResponse<E> body(E entity, Pagination pagination) {
         BaseApiResponse<E> response = new BaseApiResponse<E>().setSuccess(true).setResult(entity);
-        response.setCurrentPage(pagination.getCurrentPage());
-        response.setPageSize(pagination.getPageSize());
-        response.setTotalPage(pagination.getTotalPage());
+        if (pagination != null) {
+            response.setCurrentPage(pagination.getCurrentPage());
+            response.setPageSize(pagination.getPageSize());
+            response.setTotalPage(pagination.getTotalPage());
+        }
         return response;
     }
 }

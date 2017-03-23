@@ -1,6 +1,7 @@
 package me.yufan.gossip.rest.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import me.yufan.gossip.rest.support.Pagination;
 import org.hibernate.validator.constraints.URL;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class ArticleDTO extends Pagination {
     private static final long serialVersionUID = 657199462340722189L;

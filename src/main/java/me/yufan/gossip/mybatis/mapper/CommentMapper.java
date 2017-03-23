@@ -2,10 +2,11 @@ package me.yufan.gossip.mybatis.mapper;
 
 import me.yufan.gossip.mybatis.entity.Comment;
 import me.yufan.gossip.mybatis.mapper.base.BaseMapper;
+import me.yufan.gossip.rest.dto.CommentDTO;
 
 import java.util.List;
 
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    List<Comment> getCommentsByArticleId(Long articleId);
+    List<CommentDTO> getCommentsByArticleId(Long articleId);
 }

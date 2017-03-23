@@ -25,7 +25,7 @@ INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, 
 VALUES (111111, 888888, 888888, 'Test message', NULL, NULL, NULL, NULL, '1111', 0);
 
 INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `version`, `deleted`)
-VALUES (111112, 888888, 888888, 'Test message', NULL, NULL, NULL, NULL, '1111', 0);
+VALUES (111112, 888888, 888888, 'Test message', 111111, NULL, NULL, NULL, '1111', 0);
 
 INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `version`, `deleted`)
-VALUES (111113, 888888, 888888, 'Test message', NULL, NULL, NULL, NULL, '1111', 0);
+VALUES (111113, 888888, 888888, 'Test message', 111112, NULL, NULL, NULL, '1111', 0);

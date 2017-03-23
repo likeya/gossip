@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 import static org.hibernate.validator.constraints.SafeHtml.WhiteListType.SIMPLE_TEXT;
 
@@ -40,6 +41,10 @@ public class CommentDTO extends Pagination {
     // It's website
     @URL(regexp = "^http[s]?://.*", message = "Illegal website link, wrong format")
     private String website;
+
+    // TODO comment author type translate to understandable string
+    @Null(message = "No commenter's type required")
+    private Integer type;
 
     // The main body of comments
     @NotNull
