@@ -1,6 +1,6 @@
-# Gossip
+# Gossip [![Travis](https://api.travis-ci.org/syhily/gossip.svg?branch=master)](https://travis-ci.org/syhily/gossip/branches)
 
-[Hompage](https://syhily.github.io/gossip) | [首页](https://syhily.github.io/gossip) | ![Travis](https://api.travis-ci.org/syhily/gossip.svg?branch=master)
+[Hompage](https://syhily.github.io/gossip)
 
 A comment system for Ghost platform and other static site generator. Support [duoshuo](http://duoshuo.com),
 [Disqus](https://disqus.com) and [Wordpress](https://wordpress.org) dump file. And it's under heavy development now.
@@ -43,7 +43,7 @@ git checkout develop
 Make sure maven's bin file `mvn` could be execute from your `$PATH`
 
 ```bash
-mvn clean packge -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true
 ```
 
 A distribution package is located in `target` directory named in `gossip-x.x-SNAPSHOT.tar.gz` form.

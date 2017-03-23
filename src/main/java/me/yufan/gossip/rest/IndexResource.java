@@ -1,20 +1,24 @@
 package me.yufan.gossip.rest;
 
 import com.google.inject.Singleton;
+import me.yufan.gossip.rest.response.BaseApiResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Singleton
 @Path("/")
 public class IndexResource implements BaseResource {
 
     @GET
-    @Produces(value = "text/plain")
-    // TODO change it to a api friendly response, could be used as heart beat page
+    @Produces(MediaType.APPLICATION_JSON)
     // TODO add gossip info, system info, trace info, etc
-    public String welcome() {
-        return "Welcome to use gossip comment system,\n the system is fully started when you saw this page";
+    public Response welcome() {
+        final String welcome = "Welcome to use gossip comment system," +
+                "\n the system is fully started when you saw this page";
+        return Response.ok(BaseApiResponse.message(welcome)).build();
     }
 }

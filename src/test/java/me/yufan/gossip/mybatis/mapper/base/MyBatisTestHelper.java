@@ -7,7 +7,6 @@ import lombok.SneakyThrows;
 import me.yufan.gossip.module.GossipConfigModule;
 import me.yufan.gossip.module.GossipDataModule;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.BeforeClass;
 
@@ -18,7 +17,6 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class MyBatisTestHelper {
 
@@ -48,13 +46,5 @@ public abstract class MyBatisTestHelper {
 
         injector = Guice.createInjector(new GossipConfigModule(path, "gossip-test.properties"), new GossipDataModule());
         loadInitializeData(injector, reader);
-    }
-
-    protected Long randomId() {
-        return ThreadLocalRandom.current().nextLong(100000, 200000);
-    }
-
-    protected String randomString(int length) {
-        return RandomStringUtils.randomAlphanumeric(length);
     }
 }
