@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="me.yufan.gossip.mybatis.mapper.CommentMapper">
 
-    <sql id="commentColumn">id, author_id, article_id, message, parent_id, status, create_time, last_update_time,
-        version, deleted
+    <sql id="commentColumn">`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`,
+        `last_update_time`, `version`, `deleted`
     </sql>
 
     <sql id="tableName">`comment`</sql>
+
 
     <!-- Insert Part -->
     <insert id="insert" parameterType="comment" keyProperty="id" keyColumn="id">
@@ -61,13 +62,14 @@
         <include refid="tableName"/>
     </select>
 
-    <select id="getCommentsByArticleId" resultType="me.yufan.gossip.mybatis.entity.Comment">
+    <select id="getCommentsByArticleId" resultType="me.yufan.gossip.rest.dto.CommentDTO" parameterType="long">
         SELECT
-        <include refid="commentColumn"/>
+        c.parent_id AS reply_post_id, au.name AS name, au.email AS email, au.homepage AS website,
+        au.author_type AS type, c.message AS message
         FROM
-        <include refid="tableName"/>
+        `comment` c LEFT JOIN `author` au ON c.article_id = au.id
         <where>
-            `article_id` = #{articleId}
+            c.article_id = #{articleId}
         </where>
     </select>
 

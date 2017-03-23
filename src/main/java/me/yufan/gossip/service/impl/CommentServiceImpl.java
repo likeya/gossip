@@ -10,6 +10,8 @@ import me.yufan.gossip.service.CommentService;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 @Singleton
 public class CommentServiceImpl implements CommentService {
 
@@ -24,8 +26,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getCommentsByArticleId(ArticleDTO article) {
-        // TODO convert comment entity to comment dto
-        return null;
+    public List<CommentDTO> getCommentsByArticle(ArticleDTO article) {
+        if (article == null || article.getId() == null) {
+            return emptyList();
+        }
+        return commentMapper.getCommentsByArticleId(article.getId());
     }
 }

@@ -48,7 +48,7 @@ public class CommentResource implements BaseResource {
     @Produces(APPLICATION_JSON)
     public Response loadComment(@Valid final ArticleDTO articleDTO) {
         ArticleDTO article = articleService.getOrRegisterArticle(articleDTO);
-        List<CommentDTO> comments = commentService.getCommentsByArticleId(article);
+        List<CommentDTO> comments = commentService.getCommentsByArticle(article);
 
         return Response.ok(new CommentResponse().body(comments, articleDTO)).build();
     }
