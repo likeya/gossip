@@ -5,7 +5,6 @@ import com.google.inject.Key;
 import com.google.inject.Module;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import me.yufan.gossip.exception.GossipInitializeException;
 
 import java.util.Arrays;
@@ -55,7 +54,10 @@ public enum JdbcHelper implements Module {
         binder.bind(Key.get(String.class, named("JDBC.type"))).toProvider(of(dbType));
     }
 
-    public static JdbcHelper jdbcModule(@NonNull String dbType) {
+    public static JdbcHelper jdbcModule(String dbType) {
+        if (dbType == null) {
+            throw new GossipInitializeException("Need configuring [gossip.database.type] in your gossip configuration file.");
+        }
         final JdbcHelper helper = helperMap.get(dbType);
         if (helper == null) {
             throw new GossipInitializeException("Illegal config, we only support mysql or h2");

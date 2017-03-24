@@ -27,8 +27,7 @@
         </encoder>
     </appender>
 
-    <logger name="me.yufan.gossip" level="debug"/>
-    <logger name="" level="debug"/>
+    <logger name="me.yufan.gossip" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
