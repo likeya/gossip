@@ -37,13 +37,13 @@ public class CommentResourceTest {
     @SuppressWarnings("unchecked")
     public void return_a_empty_comment_list_when_have_a_newly_created_article() throws Exception {
         final ArticleDTO articleDTO = randomArticleDTO().setId(randomId());
-        when(articleService.getArticleByUniqueKey(articleDTO.getKey())).thenReturn(articleDTO);
+        when(articleService.getOrRegisterArticle(articleDTO)).thenReturn(articleDTO);
         when(commentService.getCommentsByArticle(articleDTO)).thenReturn(emptyList());
 
         final Response response = commentResource.loadComment(articleDTO);
         final Object entity = response.getEntity();
 
-        verify(articleService, only()).getOrRegisterArticle(any(ArticleDTO.class));
+        verify(articleService, only()).getOrRegisterArticle(articleDTO);
         verify(commentService, only()).getCommentsByArticle(any(ArticleDTO.class));
 
         assertThat(entity.getClass(), typeCompatibleWith(BaseApiResponse.class));
@@ -55,7 +55,7 @@ public class CommentResourceTest {
     @SuppressWarnings("unchecked")
     public void return_a_comment_list_when_the_article_and_comments_exist() {
         final ArticleDTO articleDTO = randomArticleDTO().setId(randomId());
-        when(articleService.getArticleByUniqueKey(articleDTO.getKey())).thenReturn(articleDTO);
+        when(articleService.getOrRegisterArticle(articleDTO)).thenReturn(articleDTO);
         when(commentService.getCommentsByArticle(any(ArticleDTO.class))).thenReturn(Lists.newArrayList(randomCommentDTO()));
 
         final Response response = commentResource.loadComment(articleDTO);

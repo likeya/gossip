@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import me.yufan.gossip.exception.base.BaseGossipException;
 import me.yufan.gossip.exception.base.GossipError;
 import me.yufan.gossip.rest.support.Pagination;
+import org.jboss.resteasy.annotations.providers.jackson.Formatted;
 
 /**
  * Common response for restful api
@@ -13,6 +14,7 @@ import me.yufan.gossip.rest.support.Pagination;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@Formatted
 public class BaseApiResponse<E> extends Pagination {
     private static final long serialVersionUID = -4213123393562785802L;
 

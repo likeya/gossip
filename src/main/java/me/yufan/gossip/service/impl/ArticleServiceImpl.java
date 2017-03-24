@@ -26,16 +26,6 @@ public class ArticleServiceImpl implements ArticleService {
         this.articleConverter = articleConverter;
     }
 
-
-    @Override
-    public ArticleDTO getArticleByUniqueKey(@NonNull String uniqueKey) {
-        final Article existedArticle = articleMapper.queryByKey(uniqueKey);
-        if (log.isDebugEnabled()) {
-            log.debug("Query article {} by key {}", existedArticle, uniqueKey);
-        }
-        return articleConverter.reverse().convert(existedArticle);
-    }
-
     @Override
     public ArticleDTO getOrRegisterArticle(@NonNull final ArticleDTO article) {
         Article existedArticle = articleMapper.queryByKey(article.getKey());

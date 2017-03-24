@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import me.yufan.gossip.rest.CommentResource;
 import me.yufan.gossip.rest.IndexResource;
 import me.yufan.gossip.rest.support.GossipExceptionProvider;
+import me.yufan.gossip.rest.support.JacksonOptimizeProvider;
 import me.yufan.gossip.rest.support.UnexpectedExceptionProvider;
 
 /**
@@ -14,6 +15,8 @@ public class GossipResourceModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        bind(JacksonOptimizeProvider.class).in(Singleton.class);
+
         bind(GossipExceptionProvider.class).in(Singleton.class);
         bind(UnexpectedExceptionProvider.class).in(Singleton.class);
 

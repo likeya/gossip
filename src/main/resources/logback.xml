@@ -1,5 +1,5 @@
 <configuration scan="true" scanPeriod="60 seconds">
-    <property name="LOG_HOME" value="../logs"/>
+    <property name="LOG_HOME" value="./logs"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -28,6 +28,7 @@
     </appender>
 
     <logger name="me.yufan.gossip" level="debug"/>
+    <logger name="" level="debug"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

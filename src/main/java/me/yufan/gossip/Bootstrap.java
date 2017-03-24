@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.yufan.gossip.module.GossipConfigModule;
 import me.yufan.gossip.module.GossipDataModule;
+import me.yufan.gossip.module.GossipLogModule;
 import me.yufan.gossip.module.GossipResourceModule;
 import org.jboss.resteasy.plugins.guice.ModuleProcessor;
 import org.jboss.resteasy.spi.ResteasyDeployment;
@@ -24,8 +25,8 @@ class Bootstrap {
     private final String configFile;
 
     void start() {
-        final Injector injector = Guice.createInjector(new GossipConfigModule(configPath, configFile), new GossipDataModule(),
-                new GossipResourceModule());
+        Injector injector = Guice.createInjector(new GossipLogModule(), new GossipConfigModule(configPath, configFile),
+            new GossipDataModule(), new GossipResourceModule());
         ModuleProcessor processor = new ModuleProcessor(deployment.getRegistry(), deployment.getProviderFactory());
         processor.processInjector(injector);
 

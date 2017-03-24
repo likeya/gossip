@@ -27,9 +27,9 @@
         </encoder>
     </appender>
 
-    <logger name="me.yufan.gossip" level="info"/>
+    <logger name="me.yufan.gossip" level="INFO"/>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>

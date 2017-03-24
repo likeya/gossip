@@ -18,7 +18,7 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/main/resources/</directory>
+            <directory>src/main/assembly/</directory>
             <outputDirectory>/config</outputDirectory>
             <includes>
                 <include>gossip.properties</include>
