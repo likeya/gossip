@@ -17,5 +17,5 @@ public abstract class IdEntity implements Serializable {
 
     // 0 identify normal status, if it's deleted this field would be the deleted time miles
     // Logic delete is good for mysql, because it doesn't have the real physical delete
-    private Long deleted;
+    private Long deleted = 0L;
 }

@@ -1,7 +1,6 @@
 package me.yufan.gossip.mybatis.support;
 
 import com.google.inject.ConfigurationException;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import me.yufan.gossip.exception.GossipInitializeException;
@@ -16,7 +15,6 @@ class KeyResolver implements Provider<String> {
 
     private final String keyName;
 
-    @Inject
     private Injector injector;
 
     KeyResolver(final String key) {
@@ -24,8 +22,7 @@ class KeyResolver implements Provider<String> {
         this.keyName = key;
     }
 
-    @Inject
-    public void setInjector(Injector injector) {
+    void setInjector(Injector injector) {
         this.injector = injector;
     }
 
@@ -34,7 +31,7 @@ class KeyResolver implements Provider<String> {
         try {
             return injector.getInstance(key);
         } catch (ConfigurationException e) { // NOSONAR no need to logs
-            throw new GossipInitializeException(keyName + " should be configured on gossip.properties");
+            throw new GossipInitializeException("[" + keyName + "] should be configured on gossip.properties");
         }
     }
 

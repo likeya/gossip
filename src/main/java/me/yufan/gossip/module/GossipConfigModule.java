@@ -41,10 +41,9 @@ public class GossipConfigModule extends AbstractModule {
 
     private URI gossipConfigUri(String configPath, @NonNull String configFile) {
         if (configPath == null || "".equals(configPath.trim())) {
-            throw new GossipInitializeException("Wrong config path, check your bootstrap shell");
+            throw new GossipInitializeException("Wrong config path, check your bootstrap shell scripts");
         }
-        String delimit = configPath.charAt(configPath.length() - 1) == '/' ? "" : "/";
-        return Paths.get(configPath + delimit + configFile).toUri();
+        return Paths.get(configPath, configFile).toUri();
     }
 
     static String getDatabaseType() {

@@ -11,7 +11,6 @@ import me.yufan.gossip.service.AuthorService;
 import me.yufan.gossip.service.CommentService;
 
 import javax.validation.Valid;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -44,9 +43,9 @@ public class CommentResource implements BaseResource {
         this.authorService = authorService;
     }
 
-    @GET
+    @POST
     @Path("/comments")
-    public Response loadComment(@Valid final ArticleDTO articleDTO) {
+    public Response loadComment(@Valid ArticleDTO articleDTO) {
         ArticleDTO article = articleService.getOrRegisterArticle(articleDTO);
         List<CommentDTO> comments = commentService.getCommentsByArticle(article);
 

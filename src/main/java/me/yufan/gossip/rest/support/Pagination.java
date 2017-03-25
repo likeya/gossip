@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Data
@@ -18,7 +17,6 @@ public abstract class Pagination {
 
     // The query page
     @Min(value = 1, message = "Page num should be positive value")
-    @NotNull(message = "Please specified your query page number")
     private Integer currentPage;
 
     // The total count multiply page size, only act as a response

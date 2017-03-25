@@ -45,7 +45,7 @@ public abstract class MyBatisTestHelper {
         final URI dbInitFile = Paths.get((path.endsWith("/") ? path : path + "/") + INIT_DB_SCRIPTS).toUri();
         Reader reader = new StringReader(IOUtils.toString(dbInitFile, Charsets.UTF_8.name()));
 
-        injector = Guice.createInjector(new GossipLogModule(), new GossipConfigModule(path, "gossip-test.properties"),
+        injector = Guice.createInjector(new GossipLogModule(path), new GossipConfigModule(path, "gossip-test.properties"),
             new GossipDataModule());
         loadInitializeData(injector, reader);
     }

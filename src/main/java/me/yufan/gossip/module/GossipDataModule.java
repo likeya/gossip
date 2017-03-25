@@ -1,7 +1,6 @@
 package me.yufan.gossip.module;
 
 import com.google.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
 import me.yufan.gossip.converter.ArticleConverter;
 import me.yufan.gossip.converter.CommentConverter;
 import me.yufan.gossip.mybatis.support.GossipDataSourceProvider;
@@ -18,7 +17,6 @@ import org.mybatis.guice.MyBatisModule;
 /**
  * Configuration on database and service interface
  */
-@Slf4j
 public class GossipDataModule extends MyBatisModule {
 
     private void initialDatabaseType() {

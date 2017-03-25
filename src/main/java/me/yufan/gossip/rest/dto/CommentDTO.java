@@ -1,6 +1,7 @@
 package me.yufan.gossip.rest.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import me.yufan.gossip.rest.support.Pagination;
 import org.hibernate.validator.constraints.Email;
@@ -17,6 +18,7 @@ import static org.hibernate.validator.constraints.SafeHtml.WhiteListType.SIMPLE_
  * The main comment data from the blog page
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class CommentDTO extends Pagination {
     private static final long serialVersionUID = -6513873674420367775L;
