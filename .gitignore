@@ -9,10 +9,13 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-#IntelliJ IDEA
+## IntelliJ IDEA
 *.iml
 .idea/
 logs/
+
+## Develop only file
+src/main/resources/gossip.properties
 
 ## Sphinx Docs
 docs/_build/

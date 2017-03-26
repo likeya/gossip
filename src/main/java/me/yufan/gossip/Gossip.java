@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import me.yufan.gossip.exception.GossipInitializeException;
-import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 
 import java.net.BindException;
 
@@ -28,7 +27,7 @@ public class Gossip {
     private Integer port; // NOSONAR
 
     @Parameter(names = {"-r", "--root"}, description = "The root resource path for comment server")
-    private String rootResourcePath = ""; // NOSONAR
+    private String rootResourcePath = "/"; // NOSONAR
 
     @Parameter(names = {"-c", "--config"}, required = true, hidden = true, description = "Custom config path")
     private String configPath;
@@ -36,17 +35,14 @@ public class Gossip {
     @Parameter(names = {"-f", "--file"}, description = "Custom config file")
     private String configFile;
 
-    private NettyJaxrsServer server;
+    private GossipServer server;
 
     private void start() throws BindException {
         if (server == null) {
-            server = new NettyJaxrsServer();
+            server = new GossipServer(configPath, configFile);
             server.setPort(port);
             server.setRootResourcePath(rootResourcePath);
             server.start();
-
-            Bootstrap bootstrap = new Bootstrap(server.getDeployment(), configPath, configFile);
-            bootstrap.start();
         } else {
             throw new GossipInitializeException("The gossip server is already started, check the author's shit logic code");
         }
@@ -60,6 +56,7 @@ public class Gossip {
                 commander.usage();
                 System.exit(0);
             }
+            log.info("Check arguments success, start gossip.");
             gossip.start();
         } catch (ParameterException e) { // NOSONAR ignore this exception
             log.error(e.getMessage());

@@ -6,6 +6,7 @@ import com.google.inject.Injector;
 import lombok.SneakyThrows;
 import me.yufan.gossip.module.GossipConfigModule;
 import me.yufan.gossip.module.GossipDataModule;
+import me.yufan.gossip.module.GossipLogModule;
 import org.apache.commons.io.IOUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.BeforeClass;
@@ -44,7 +45,8 @@ public abstract class MyBatisTestHelper {
         final URI dbInitFile = Paths.get((path.endsWith("/") ? path : path + "/") + INIT_DB_SCRIPTS).toUri();
         Reader reader = new StringReader(IOUtils.toString(dbInitFile, Charsets.UTF_8.name()));
 
-        injector = Guice.createInjector(new GossipConfigModule(path, "gossip-test.properties"), new GossipDataModule());
+        injector = Guice.createInjector(new GossipLogModule(path), new GossipConfigModule(path, "gossip-test.properties"),
+            new GossipDataModule());
         loadInitializeData(injector, reader);
     }
 }

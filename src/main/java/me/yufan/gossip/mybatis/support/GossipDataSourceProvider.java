@@ -1,8 +1,7 @@
-package me.yufan.gossip.mybatis;
+package me.yufan.gossip.mybatis.support;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import me.yufan.gossip.exception.GossipInitializeException;
 import org.apache.ibatis.jdbc.RuntimeSqlException;
@@ -16,6 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static me.yufan.gossip.mybatis.support.JdbcHelper.MYSQL;
 import static org.apache.ibatis.io.Resources.getResourceAsReader;
 
 /**
@@ -43,10 +43,10 @@ public class GossipDataSourceProvider extends DruidDataSourceProvider {
         log.debug("Execute auto schema creation on {}", jdbcUrl);
 
         try (final Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            executeSQL(connection, new StringReader("CREATE DATABASE IF NOT EXISTS " + databaseName));
+            executeSQL(connection, new StringReader("CREATE DATABASE IF NOT EXISTS " + databaseName + ";"));
         } catch (SQLException e) {
             throw new GossipInitializeException("Couldn't create database, this may be the wrong privilege on you operation." +
-                    "\n Or could be a db misconfiguration on gossip, error info [" + e.getMessage() + "]", e);
+                "\n Or could be a db misconfiguration on gossip, error info [" + e.getMessage() + "]", e);
         }
     }
 
@@ -63,28 +63,13 @@ public class GossipDataSourceProvider extends DruidDataSourceProvider {
         }
     }
 
-    /**
-     * Magic code for mysql & h2, mysql jdbc url would remove the database part,
-     * h2 jdbc would do nothing.
-     */
-    private String normalizeJdbcUrl(@NonNull String url) {
-        int index = url.lastIndexOf('/');
-        int portIndex = url.lastIndexOf(':');
-        if (index > 0 && index > portIndex && index < url.length() - 1) {
-            return url.substring(0, index);
-        } else {
-            return url;
-        }
-    }
-
     @Inject
-    public void initialSchema(@Named("JDBC.url") String jdbcUrl, @Named("JDBC.schema") String databaseName,
-                              @Named("JDBC.username") final String username, @Named("JDBC.password") final String password) {
-        String dbType = "h2";
-        if (jdbcUrl.contains("mysql")) {
-            createSchema(normalizeJdbcUrl(jdbcUrl), databaseName, username, password);
-            dbType = "mysql";
+    public void initialSchema(@Named("JDBC.url") String jdbcUrl, @Named("JDBC.rawUrl") String jdbcRawUrl,
+                              @Named("JDBC.schema") String databaseName, @Named("JDBC.username") final String username,
+                              @Named("JDBC.password") final String password, @Named("JDBC.type") String type) {
+        if (MYSQL.getDbType().equals(type)) {
+            createSchema(jdbcRawUrl, databaseName, username, password);
         }
-        loadSchema(jdbcUrl, username, password, dbType);
+        loadSchema(jdbcUrl, username, password, type);
     }
 }

@@ -43,17 +43,6 @@ public class ArticleServiceImplTest {
     }
 
     @Test
-    public void query_article_by_its_unique_key() throws Exception {
-        Article article = randomArticle();
-        String uniqueKey = article.getUniqueKey();
-        oneArticleFromUniqueKey(article);
-
-        ArticleDTO queryArticle = articleService.getArticleByUniqueKey(uniqueKey);
-        verify(articleMapper, only()).queryByKey(uniqueKey);
-        assertThat(articleConverter.reverse().convert(article), is(queryArticle));
-    }
-
-    @Test
     public void register_a_new_article_when_no_article_existed_from_unique_key() {
         Article article = randomRawArticle();
         Long newId = randomId();

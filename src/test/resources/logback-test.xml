@@ -1,7 +1,6 @@
 <configuration scan="true" scanPeriod="60 seconds">
-    <property name="LOG_HOME" value="../logs"/>
+    <property name="LOG_HOME" value="./logs"/>
 
-    <!-- Should this be removed ? -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
@@ -27,9 +26,9 @@
         </encoder>
     </appender>
 
-    <logger name="me.yufan.gossip" level="INFO"/>
+    <logger name="me.yufan.gossip" level="DEBUG"/>
 
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>

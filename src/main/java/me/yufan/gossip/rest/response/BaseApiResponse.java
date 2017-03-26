@@ -4,8 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import me.yufan.gossip.exception.base.BaseGossipException;
-import me.yufan.gossip.exception.base.GossipError;
 import me.yufan.gossip.rest.support.Pagination;
+import org.jboss.resteasy.annotations.providers.jackson.Formatted;
+
+import static me.yufan.gossip.exception.base.GossipError.INTERNAL_ERROR;
 
 /**
  * Common response for restful api
@@ -13,6 +15,7 @@ import me.yufan.gossip.rest.support.Pagination;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@Formatted
 public class BaseApiResponse<E> extends Pagination {
     private static final long serialVersionUID = -4213123393562785802L;
 
@@ -34,7 +37,7 @@ public class BaseApiResponse<E> extends Pagination {
     }
 
     public static BaseApiResponse<Void> failed(Exception exception) {
-        return new BaseApiResponse<Void>().setSuccess(false).setErrorCode(GossipError.INTERNAL_ERROR.errorCode)
+        return new BaseApiResponse<Void>().setSuccess(false).setErrorCode(INTERNAL_ERROR.errorCode)
             .setErrorMsg(exception.getMessage());
     }
 

@@ -11,7 +11,6 @@ import me.yufan.gossip.service.AuthorService;
 import me.yufan.gossip.service.CommentService;
 
 import javax.validation.Valid;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -28,6 +27,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 // TODO support UA identity
 // TODO add rate limit
 // TODO add spam check
+@Produces(APPLICATION_JSON)
 public class CommentResource implements BaseResource {
 
     private final CommentService commentService;
@@ -43,10 +43,9 @@ public class CommentResource implements BaseResource {
         this.authorService = authorService;
     }
 
-    @GET
+    @POST
     @Path("/comments")
-    @Produces(APPLICATION_JSON)
-    public Response loadComment(@Valid final ArticleDTO articleDTO) {
+    public Response loadComment(@Valid ArticleDTO articleDTO) {
         ArticleDTO article = articleService.getOrRegisterArticle(articleDTO);
         List<CommentDTO> comments = commentService.getCommentsByArticle(article);
 
@@ -54,7 +53,6 @@ public class CommentResource implements BaseResource {
     }
 
     @POST
-    @Produces(APPLICATION_JSON)
     public Response comment(@Valid final CommentDTO comment) {
         // TODO Check the existed article
         articleService.getOrRegisterArticle(null);

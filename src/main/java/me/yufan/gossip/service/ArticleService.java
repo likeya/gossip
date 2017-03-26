@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface ArticleService {
 
-    ArticleDTO getArticleByUniqueKey(String uniqueKey);
-
     ArticleDTO getOrRegisterArticle(ArticleDTO article);
 
     void deleteArticle(Long articleId);
