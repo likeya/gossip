@@ -31,7 +31,7 @@
 
     <organization>
         <name>Artistian Programmers</name>
-        <url>https://artistian.org</url>
+        <url>https://github.com/Artistian</url>
     </organization>
 
     <developers>
@@ -41,6 +41,16 @@
             <url>https://yufan.me</url>
         </developer>
     </developers>
+
+    <contributors>
+        <contributor>
+            <name>Li Keya</name>
+            <email>likeya@gmail.com</email>
+            <url>https://likeya.me</url>
+        </contributor>
+    </contributors>
+
+    <inceptionYear>2016</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -329,6 +339,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+            </plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
@@ -356,7 +384,6 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!-- TODO add failsafe plugin for integration test -->
         </plugins>
     </build>
 </project>
