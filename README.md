@@ -3,6 +3,7 @@
 [![Build Status](https://api.travis-ci.org/syhily/gossip.svg?branch=master)](https://travis-ci.org/syhily/gossip/branches)
 [![Dependency Status](https://www.versioneye.com/user/projects/58d7ec64dcaf9e0041b5c019/badge.svg?style=flat)](https://www.versioneye.com/user/projects/58d7ec64dcaf9e0041b5c019)
 [![Coverage Status](https://coveralls.io/repos/github/syhily/gossip/badge.svg?branch=master&service=github)](https://coveralls.io/github/syhily/gossip?branch=master)
+[![Code Climate](https://codeclimate.com/github/syhily/gossip/badges/gpa.svg)](https://codeclimate.com/github/syhily/gossip)
 [![License](https://img.shields.io/:license-mit-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 [Hompage](https://syhily.github.io/gossip)
@@ -26,7 +27,7 @@ I found a lot of open source comment system on Github, but none of them is easy 
 
 ## System Requirement
 
-1. Java Runtime Environment 1.8+ (Openjdk is welcome on Linux)
+1. Oracle Java Runtime Environment 1.8+ (Openjdk 8 is not fully tested, but I would work on it as soon as Travis support it.)
 2. At least 100M free memory for running gossip comment system (Java consumes a lot memory, I was trying to reduce its consumption.)
 3. MySQL 5.x - **InnoDB engine** is required for better performance (Also support H2 database for estimation, sqlite would not be a good choice)
 4. A frontend proxy server like nginx, act as the waf for gossip.
