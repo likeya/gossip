@@ -14,7 +14,7 @@ import java.net.BindException;
  * Gossip Application
  * <p>
  * A comment engine
- * Using Jersey as JAX-RS implement and Grizzly as backend server
+ * Using Resteasy as JAX-RS implement and Netty as backend server
  */
 @Slf4j
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class Gossip {
     private Integer port; // NOSONAR
 
     @Parameter(names = {"-r", "--root"}, description = "The root resource path for comment server")
-    private String rootResourcePath = "/"; // NOSONAR
+    private String rootResourcePath = "/"; // NOSONAR Netty would auto trim it to empty string
 
     @Parameter(names = {"-c", "--config"}, required = true, hidden = true, description = "Custom config path")
     private String configPath;

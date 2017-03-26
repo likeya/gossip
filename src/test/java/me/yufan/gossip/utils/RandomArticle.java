@@ -5,6 +5,10 @@ import me.yufan.gossip.rest.dto.ArticleDTO;
 
 public class RandomArticle extends RandomEntityGenerator {
 
+    private RandomArticle() {
+        // No constructor
+    }
+
     public static Article randomArticle() {
         Article article = randomRawArticle();
         article.setId(randomId());

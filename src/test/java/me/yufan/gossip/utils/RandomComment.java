@@ -5,6 +5,10 @@ import me.yufan.gossip.rest.dto.CommentDTO;
 
 public class RandomComment extends RandomEntityGenerator {
 
+    private RandomComment() {
+        // No constructor
+    }
+
     public static CommentDTO randomCommentDTO() {
         return new CommentDTO()
             .setReplyPostId(randomId())
