@@ -1,6 +1,6 @@
 package me.yufan.gossip.service.impl;
 
-import me.yufan.gossip.converter.CommentConverter;
+import me.yufan.gossip.converter.entity.CommentConverter;
 import me.yufan.gossip.mybatis.mapper.CommentMapper;
 import me.yufan.gossip.rest.dto.ArticleDTO;
 import me.yufan.gossip.rest.dto.CommentDTO;

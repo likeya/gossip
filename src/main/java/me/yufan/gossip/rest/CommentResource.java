@@ -3,6 +3,7 @@ package me.yufan.gossip.rest;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.yufan.gossip.rest.dto.ArticleDTO;
+import me.yufan.gossip.rest.dto.AuthorDTO;
 import me.yufan.gossip.rest.dto.CommentDTO;
 import me.yufan.gossip.rest.response.BaseApiResponse;
 import me.yufan.gossip.rest.response.CommentResponse;
@@ -22,7 +23,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 /**
  * The main comment api for gossip
  */
-@Path("/api")
+@Path("/api/comments")
 @Singleton
 // TODO support UA identity
 // TODO add rate limit
@@ -44,7 +45,7 @@ public class CommentResource implements BaseResource {
     }
 
     @POST
-    @Path("/comments")
+    // TODO support pagination
     public Response loadComment(@Valid ArticleDTO articleDTO) {
         ArticleDTO article = articleService.getOrRegisterArticle(articleDTO);
         List<CommentDTO> comments = commentService.getCommentsByArticle(article);
@@ -53,14 +54,12 @@ public class CommentResource implements BaseResource {
     }
 
     @POST
-    public Response comment(@Valid final CommentDTO comment) {
-        // TODO Check the existed article
-        articleService.getOrRegisterArticle(null);
+    @Path("/add")
+    public Response addComment(@Valid CommentDTO comment) {
+        ArticleDTO article = articleService.getArticleByKey(comment.getArticleKey());
+        AuthorDTO author = authorService.getOrRegisterAuthor(comment);
+        commentService.addComment(comment, article.getId(), author.getId());
 
-
-        // TODO auto create article
-        // TODO auto insert comment data
-        // TODO auto author indexes
         return Response.ok(BaseApiResponse.ok()).build();
     }
 }

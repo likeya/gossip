@@ -8,6 +8,8 @@ public interface ArticleService {
 
     ArticleDTO getOrRegisterArticle(ArticleDTO article);
 
+    ArticleDTO getArticleByKey(String uniqueKey);
+
     void deleteArticle(Long articleId);
 
     void modifyArticle(Long articleId, ArticleDTO article);

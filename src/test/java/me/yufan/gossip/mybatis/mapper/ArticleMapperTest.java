@@ -9,12 +9,14 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static me.yufan.gossip.utils.RandomArticle.randomArticle;
 import static me.yufan.gossip.utils.RandomEntityGenerator.randomString;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -84,8 +86,12 @@ public class ArticleMapperTest extends MyBatisTestHelper {
         mapper.delete(articleId, deleteTime);
 
         final Article deletedArticle = mapper.queryOne(articleId);
-        assertThat(deletedArticle, notNullValue());
-        assertThat(deletedArticle.getDeleted(), is(deleteTime));
+        assertThat(deletedArticle, nullValue());
+
+        article.setDeleted(deleteTime);
+        final Optional<Article> deleted = mapper.query(article).stream().findFirst();
+        assertThat(deleted.isPresent(), is(true));
+        assertThat(deleted.get().getDeleted(), is(deleteTime));
     }
 
     @Test

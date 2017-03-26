@@ -29,6 +29,7 @@
         <include refid="tableName"/>
         <where>
             `id` = #{id}
+            AND `deleted` = 0
         </where>
     </select>
 
@@ -50,6 +51,9 @@
         <include refid="articleColumn"/>
         FROM
         <include refid="tableName"/>
+        <where>
+            `deleted` = 0
+        </where>
     </select>
 
     <select id="queryByKey" resultType="article">
@@ -59,6 +63,7 @@
         <include refid="tableName"/>
         <where>
             `unique_key` = #{key}
+            AND `deleted` = 0
         </where>
     </select>
 

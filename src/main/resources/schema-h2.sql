@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `status`           SMALLINT     NOT NULL DEFAULT 0,
   `create_time`      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update_time` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `version`          VARCHAR(128) NOT NULL DEFAULT '',
   `deleted`          BIGINT       NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`id`),

@@ -44,12 +44,11 @@ public class CommentDTO extends Pagination {
     @URL(regexp = "^http[s]?://.*", message = "Illegal website link, wrong format")
     private String website;
 
-    // TODO comment author type translate to understandable string
     @Null(message = "No commenter's type required")
     private Integer type;
 
     // The main body of comments
     @NotNull
-    @SafeHtml(whitelistType = SIMPLE_TEXT)
+    @SafeHtml(whitelistType = SIMPLE_TEXT, message = "Illegal contents, only support <b>, <em>, <i>, <strong>, <u>")
     private String message;
 }

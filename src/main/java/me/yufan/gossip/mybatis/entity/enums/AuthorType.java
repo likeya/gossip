@@ -27,6 +27,6 @@ public enum AuthorType {
             Arrays.stream(values()).collect(toMap(AuthorType::getCode, authorType -> authorType));
 
     public static AuthorType convert(String code) {
-        return code == null ? null : typeMap.get(Integer.valueOf(code));
+        return code == null ? null : typeMap.getOrDefault(Integer.valueOf(code), GUEST);
     }
 }

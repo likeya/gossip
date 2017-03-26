@@ -1,8 +1,10 @@
 package me.yufan.gossip.module;
 
 import com.google.inject.Singleton;
-import me.yufan.gossip.converter.ArticleConverter;
-import me.yufan.gossip.converter.CommentConverter;
+import me.yufan.gossip.converter.dto.CommentAuthorConverter;
+import me.yufan.gossip.converter.entity.ArticleConverter;
+import me.yufan.gossip.converter.entity.AuthorConverter;
+import me.yufan.gossip.converter.entity.CommentConverter;
 import me.yufan.gossip.mybatis.support.GossipDataSourceProvider;
 import me.yufan.gossip.mybatis.support.JdbcHelper;
 import me.yufan.gossip.service.ArticleService;
@@ -30,6 +32,8 @@ public class GossipDataModule extends MyBatisModule {
     private void initialService() {
         bind(ArticleConverter.class).toProvider(ArticleConverter::new).in(Singleton.class);
         bind(CommentConverter.class).toProvider(CommentConverter::new).in(Singleton.class);
+        bind(AuthorConverter.class).toProvider(AuthorConverter::new).in(Singleton.class);
+        bind(CommentAuthorConverter.class).toProvider(CommentAuthorConverter::new).in(Singleton.class);
 
         bind(ArticleService.class).to(ArticleServiceImpl.class).in(Singleton.class);
         bind(AuthorService.class).to(AuthorServiceImpl.class).in(Singleton.class);

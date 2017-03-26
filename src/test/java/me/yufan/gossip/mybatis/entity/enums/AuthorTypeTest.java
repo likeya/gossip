@@ -17,7 +17,7 @@ public class AuthorTypeTest {
     @Test
     public void get_a_not_existed_type() throws Exception {
         final AuthorType convert = AuthorType.convert("113434");
-        assertThat(convert, nullValue());
+        assertThat(convert, is(AuthorType.GUEST));
     }
 
     @Test

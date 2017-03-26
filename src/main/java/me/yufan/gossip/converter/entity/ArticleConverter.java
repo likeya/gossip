@@ -1,4 +1,4 @@
-package me.yufan.gossip.converter;
+package me.yufan.gossip.converter.entity;
 
 import com.google.common.base.Converter;
 import me.yufan.gossip.mybatis.entity.Article;
@@ -17,6 +17,7 @@ public class ArticleConverter extends Converter<ArticleDTO, Article> {
     @Override
     protected ArticleDTO doBackward(Article article) {
         return new ArticleDTO()
+            .setId(article.getId())
             .setName(article.getName())
             .setUrl(article.getUrl())
             .setKey(article.getUniqueKey());

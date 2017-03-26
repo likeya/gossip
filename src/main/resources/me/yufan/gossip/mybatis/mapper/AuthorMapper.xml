@@ -30,6 +30,7 @@
         <include refid="tableName"/>
         <where>
             `id` = #{id}
+            AND `deleted` = 0
         </where>
     </select>
 
@@ -53,6 +54,9 @@
         <include refid="authorColumn"/>
         FROM
         <include refid="tableName"/>
+        <where>
+            `deleted` = 0
+        </where>
     </select>
 
     <!-- Update Part -->
