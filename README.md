@@ -22,7 +22,7 @@ I found a lot of open source comment system on Github, but none of them is easy 
 ## System Requirement
 
 1. Java Runtime Environment 1.8+ (Openjdk is welcome on Linux)
-2. At least 300M free memory for running gossip comment system (Java consumes a lot memory, I was trying to reduce its consumption.)
+2. At least 100M free memory for running gossip comment system (Java consumes a lot memory, I was trying to reduce its consumption.)
 3. MySQL 5.x - **InnoDB engine** is required for better performance (Also support H2 database for estimation, sqlite would not be a good choice)
 4. A frontend proxy server like nginx, act as the waf for gossip.
 
@@ -68,6 +68,18 @@ TODO frontend and proxy server configuration
 ## Detailed Configuration
 
 TODO, would be finished before the initial release of gossip.
+
+## Known issues
+
+1. When visiting the homepage in browser, your should get a error log like below. 
+
+>RESTEASY018525: Unexpected org.jboss.resteasy.spi.UnhandledException: org.jboss.resteasy.core.NoMessageBodyWriterFoundFailure: Could not find MessageBodyWriter for response object of type: me.yufan.gossip.rest.response.BaseApiResponse of media type: application/octet-stream
+
+This is a known issue on resteasy & netty integration, don't worry. It doesn't affect the SLA of gossip.
+
+2. Unable to find CDI supporting ValidatorFactory. Using default ValidatorFactory
+
+This log would be shown in `gossip.log` if you set the gossip to debug mode. But this is a helper log for developer, ignore it if you are a gossip user.
 
 ## Development
 

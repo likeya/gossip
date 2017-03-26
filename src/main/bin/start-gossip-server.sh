@@ -27,7 +27,7 @@ fi
 
 # Memory options
 if [ -z "${HEAP_OPTS}" ]; then
-    HEAP_OPTS="-Xms100m -Xmx300m -XX:PermSize=64m"
+    HEAP_OPTS="-Xms100m -Xmx200m"
 fi
 
 # Debug for GC

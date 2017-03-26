@@ -27,7 +27,7 @@ public class Gossip {
     private Integer port; // NOSONAR
 
     @Parameter(names = {"-r", "--root"}, description = "The root resource path for comment server")
-    private String rootResourcePath = ""; // NOSONAR
+    private String rootResourcePath = "/"; // NOSONAR
 
     @Parameter(names = {"-c", "--config"}, required = true, hidden = true, description = "Custom config path")
     private String configPath;
