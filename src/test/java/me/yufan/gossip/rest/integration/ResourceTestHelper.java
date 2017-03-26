@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 
 import static me.yufan.gossip.utils.RandomEntityGenerator.randomId;
 
@@ -30,7 +30,7 @@ public abstract class ResourceTestHelper {
     @BeforeClass
     public static void bootstrapGossip() {
         String configPath = Paths.get("src/test/resources").toAbsolutePath().toString();
-        ArrayList<String> args = Lists.newArrayList("-c", configPath, "-p", port.toString(), "-f", "gossip-test.properties");
-        Gossip.main(args.toArray(new String[4]));
+        List<String> args = Lists.newArrayList("-c", configPath, "-p", port.toString(), "-f", "gossip-test.properties");
+        Gossip.main(args.toArray(new String[args.size()]));
     }
 }

@@ -1,4 +1,9 @@
-# Gossip [![Travis](https://api.travis-ci.org/syhily/gossip.svg?branch=master)](https://travis-ci.org/syhily/gossip/branches)
+# Gossip 
+
+[![Build Status](https://api.travis-ci.org/syhily/gossip.svg?branch=master)](https://travis-ci.org/syhily/gossip/branches)
+[![Dependency Status](https://www.versioneye.com/user/projects/58d7ec64dcaf9e0041b5c019/badge.svg?style=flat)](https://www.versioneye.com/user/projects/58d7ec64dcaf9e0041b5c019)
+[![Coverage Status](https://coveralls.io/repos/github/syhily/gossip/badge.svg?branch=master&service=github)](https://coveralls.io/github/syhily/gossip?branch=master)
+[![License](https://img.shields.io/:license-mit-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 [Hompage](https://syhily.github.io/gossip)
 

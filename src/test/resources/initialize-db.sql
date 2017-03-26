@@ -21,11 +21,11 @@ INSERT INTO `author` (`id`, `name`, `email`, `homepage`, `author_type`, `create_
 VALUES (888888, 'Test Author', 'example@example.com', 'http://www.example.com', NULL, NULL, NULL);
 
 -- Comment
-INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `version`, `deleted`)
-VALUES (111111, 888888, 888888, 'Test message', NULL, NULL, NULL, NULL, '1111', 0);
+INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `deleted`)
+VALUES (111111, 888888, 888888, 'Test message', NULL, NULL, NULL, NULL, 0);
 
-INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `version`, `deleted`)
-VALUES (111112, 888888, 888888, 'Test message', 111111, NULL, NULL, NULL, '1111', 0);
+INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `deleted`)
+VALUES (111112, 888888, 888888, 'Test message', 111111, NULL, NULL, NULL, 0);
 
-INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `version`, `deleted`)
-VALUES (111113, 888888, 888888, 'Test message', 111112, NULL, NULL, NULL, '1111', 0);
+INSERT INTO `comment` (`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`, `last_update_time`, `deleted`)
+VALUES (111113, 888888, 888888, 'Test message', 111112, NULL, NULL, NULL, 0);

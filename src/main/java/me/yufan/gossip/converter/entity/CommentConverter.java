@@ -1,4 +1,4 @@
-package me.yufan.gossip.converter;
+package me.yufan.gossip.converter.entity;
 
 import com.google.common.base.Converter;
 import me.yufan.gossip.mybatis.entity.Comment;

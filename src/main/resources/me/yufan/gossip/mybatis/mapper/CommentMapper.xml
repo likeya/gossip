@@ -3,7 +3,7 @@
 <mapper namespace="me.yufan.gossip.mybatis.mapper.CommentMapper">
 
     <sql id="commentColumn">`id`, `author_id`, `article_id`, `message`, `parent_id`, `status`, `create_time`,
-        `last_update_time`, `version`, `deleted`
+        `last_update_time`, `deleted`
     </sql>
 
     <sql id="tableName">`comment`</sql>
@@ -14,7 +14,7 @@
         INSERT INTO
         <include refid="tableName"/>(<include refid="commentColumn"/>)
         VALUES (#{id}, #{authorId}, #{articleId}, #{message}, #{parentId}, #{status}, #{createTime}, #{lastUpdateTime},
-        #{version}, #{deleted})
+        #{deleted})
     </insert>
 
     <insert id="batchInsert" parameterType="comment" keyColumn="id" keyProperty="id">
@@ -22,7 +22,7 @@
         <include refid="tableName"/>(<include refid="commentColumn"/>) VALUES
         <foreach collection="list" item="model" separator=",">
             (#{model.id}, #{model.authorId}, #{model.articleId}, #{model.message}, #{model.parentId}, #{model.status},
-            #{model.createTime}, #{model.lastUpdateTime}, #{model.version}, #{model.deleted})
+            #{model.createTime}, #{model.lastUpdateTime}, #{model.deleted})
         </foreach>
     </insert>
 
@@ -34,6 +34,7 @@
         <include refid="tableName"/>
         <where>
             `id` = #{id}
+            AND `deleted` = 0
         </where>
     </select>
 
@@ -50,7 +51,6 @@
             <if test="status != null">AND `status` = #{status}</if>
             <if test="createTime != null">AND `create_time` = #{createTime}</if>
             <if test="lastUpdateTime != null">AND `last_update_time` = #{lastUpdateTime}</if>
-            <if test="version != null">AND `version` = #{version}</if>
             <if test="deleted != null">AND `deleted` = #{deleted}</if>
         </where>
     </select>
@@ -60,6 +60,9 @@
         <include refid="commentColumn"/>
         FROM
         <include refid="tableName"/>
+        <where>
+            `deleted` = 0
+        </where>
     </select>
 
     <select id="getCommentsByArticleId" resultType="me.yufan.gossip.rest.dto.CommentDTO" parameterType="long">
@@ -70,6 +73,8 @@
         `comment` c LEFT JOIN `author` au ON c.article_id = au.id
         <where>
             c.article_id = #{articleId}
+            AND c.`deleted` = 0
+            AND au.`deleted` = 0
         </where>
     </select>
 
@@ -85,7 +90,6 @@
             <if test="status != null">`status` = #{status},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="lastUpdateTime != null">`last_update_time` = #{lastUpdateTime},</if>
-            <if test="version != null">`version` = #{version},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
         <where>

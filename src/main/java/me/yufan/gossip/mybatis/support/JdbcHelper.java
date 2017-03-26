@@ -25,7 +25,7 @@ import static java.util.stream.Collectors.toMap;
 @Getter
 public enum JdbcHelper implements Module {
 
-    H2_EMBEDDED("h2", "jdbc:h2:${JDBC.schema};MODE=MySQL", "jdbc:h2:${JDBC.schema};MODE=MySQL", "org.h2.Driver"),
+    H2_EMBEDDED("h2", "jdbc:h2:${JDBC.schema};MODE=MySQL", "", "org.h2.Driver"),
 
     MYSQL("mysql", "jdbc:mysql://${JDBC.host}:${JDBC.port}/${JDBC.schema}" + JdbcHelper.MYSQL_QUERY_STRING,
         "jdbc:mysql://${JDBC.host}:${JDBC.port}" + JdbcHelper.MYSQL_QUERY_STRING, "com.mysql.jdbc.Driver");

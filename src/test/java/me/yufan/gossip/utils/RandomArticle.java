@@ -5,6 +5,10 @@ import me.yufan.gossip.rest.dto.ArticleDTO;
 
 public class RandomArticle extends RandomEntityGenerator {
 
+    private RandomArticle() {
+        // No constructor
+    }
+
     public static Article randomArticle() {
         Article article = randomRawArticle();
         article.setId(randomId());
@@ -13,15 +17,15 @@ public class RandomArticle extends RandomEntityGenerator {
 
     public static Article randomRawArticle() {
         return new Article()
-                .setName(randomString(128))
-                .setUniqueKey(randomString(1024))
-                .setUrl(randomString(512));
+            .setName(randomString(128))
+            .setUniqueKey(randomString(1024))
+            .setUrl(randomString(512));
     }
 
     public static ArticleDTO randomArticleDTO() {
         return new ArticleDTO()
-                .setKey(randomString(32))
-                .setName(randomString(64))
-                .setUrl("http://www.example.com/" + randomString(10));
+            .setKey(randomString(20))
+            .setName(randomString(10))
+            .setUrl(randomUrl());
     }
 }

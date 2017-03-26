@@ -4,16 +4,19 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import me.yufan.gossip.converter.ArticleConverter;
+import me.yufan.gossip.converter.entity.ArticleConverter;
+import me.yufan.gossip.exception.database.NotPresentException;
 import me.yufan.gossip.mybatis.entity.Article;
 import me.yufan.gossip.mybatis.mapper.ArticleMapper;
 import me.yufan.gossip.rest.dto.ArticleDTO;
 import me.yufan.gossip.service.ArticleService;
+import org.mybatis.guice.transactional.Transactional;
 
 import java.util.List;
 
 @Singleton
 @Slf4j
+@Transactional
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleMapper articleMapper;
@@ -34,6 +37,15 @@ public class ArticleServiceImpl implements ArticleService {
 
             existedArticle = articleConverter.convert(article);
             articleMapper.insert(existedArticle);
+        }
+        return articleConverter.reverse().convert(existedArticle);
+    }
+
+    @Override
+    public ArticleDTO getArticleByKey(String uniqueKey) {
+        Article existedArticle = articleMapper.queryByKey(uniqueKey);
+        if (existedArticle == null) {
+            throw new NotPresentException("The article doesn't exist");
         }
         return articleConverter.reverse().convert(existedArticle);
     }

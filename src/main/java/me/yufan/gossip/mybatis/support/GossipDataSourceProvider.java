@@ -15,7 +15,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static me.yufan.gossip.mybatis.support.JdbcHelper.MYSQL;
 import static org.apache.ibatis.io.Resources.getResourceAsReader;
 
 /**
@@ -67,7 +66,7 @@ public class GossipDataSourceProvider extends DruidDataSourceProvider {
     public void initialSchema(@Named("JDBC.url") String jdbcUrl, @Named("JDBC.rawUrl") String jdbcRawUrl,
                               @Named("JDBC.schema") String databaseName, @Named("JDBC.username") final String username,
                               @Named("JDBC.password") final String password, @Named("JDBC.type") String type) {
-        if (MYSQL.getDbType().equals(type)) {
+        if (!"".equals(jdbcRawUrl)) {
             createSchema(jdbcRawUrl, databaseName, username, password);
         }
         loadSchema(jdbcUrl, username, password, type);

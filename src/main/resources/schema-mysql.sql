@@ -50,8 +50,6 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `create_time`      TIMESTAMP    NOT NULL   DEFAULT CURRENT_TIMESTAMP
   COMMENT 'first comment time, would be the import time if create from other system',
   `last_update_time` TIMESTAMP    NOT NULL   DEFAULT CURRENT_TIMESTAMP,
-  `version`          VARCHAR(128) NOT NULL   DEFAULT ''
-  COMMENT 'reserve column for optimistic lock',
   `deleted`          BIGINT       NOT NULL   DEFAULT 0
   COMMENT '0 is normal status, the record would be deleted if this column is bigger than zero',
 

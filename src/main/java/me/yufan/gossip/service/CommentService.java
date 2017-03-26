@@ -8,4 +8,6 @@ import java.util.List;
 public interface CommentService {
 
     List<CommentDTO> getCommentsByArticle(ArticleDTO article);
+
+    void addComment(CommentDTO comment, Long articleId, Long authorId);
 }

@@ -15,12 +15,17 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
 @javax.ws.rs.ext.Provider
 public class JacksonOptimizeProvider implements ContextResolver<ObjectMapper>, Provider<ObjectMapper> {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper;
+
+    static {
+        // Static block to initialize ObjectMapper, any better solution ?
+        mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+    }
 
     @Override
     public ObjectMapper getContext(Class<?> type) {
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
         return mapper;
     }
 

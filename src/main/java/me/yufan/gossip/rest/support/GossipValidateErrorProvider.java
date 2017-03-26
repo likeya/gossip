@@ -1,5 +1,6 @@
 package me.yufan.gossip.rest.support;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -65,6 +66,13 @@ public class GossipValidateErrorProvider implements ExceptionMapper<ValidationEx
         if (violations.isEmpty()) {
             builder.entity(new ValidateErrorResponse(exception.toString()));
         } else {
+            if (log.isDebugEnabled()) {
+                try {
+                    log.debug(objectMapper.writeValueAsString(violations));
+                } catch (JsonProcessingException e) {
+                    log.debug("", e); // Useless, just make sonar and compiler happy w(ﾟДﾟ)w
+                }
+            }
             builder.entity(new ValidateErrorResponse(violations));
         }
 
